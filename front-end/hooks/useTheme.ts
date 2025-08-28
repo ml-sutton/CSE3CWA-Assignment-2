@@ -1,0 +1,30 @@
+import { useEffect } from "react";
+
+export default function useTheme(theme: "light" | "dark" | null) {
+  useEffect(() => {
+    let themeToApply: "light"|"dark";
+    if (theme === null) {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      themeToApply = isDark ? "dark" : "light"
+    } else {
+      themeToApply=theme
+    }
+    document.documentElement.setAttribute("data-theme", themeToApply);
+    localStorage.setItem("currentTheme", themeToApply);
+    if (theme === null) {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+      const handler = (event: MediaQueryListEvent) => {
+        const newTheme = event.matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("currentTheme", newTheme);
+      };
+
+      mediaQuery.addEventListener("change", handler);
+
+      return () => {
+        mediaQuery.removeEventListener("change", handler);
+      }
+    }
+  }, [theme])
+}

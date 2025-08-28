@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@layer utilities {
+  @variants custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)) {
+    /* your utilities here will be prefixed with dark: */
+  }
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +31,216 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.hamburger-label {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hamburger-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.hamburger-bar {
+  display: block;
+  height: 4px;
+  background-color: var(--foreground);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.bar-top,
+.bar-mid,
+.bar-bottom {
+  width: 100%;
+}
+
+input[type="checkbox"]:checked+label .bar-top {
+  transform: translateY(12.5px) rotate(45deg);
+}
+
+input[type="checkbox"]:checked+label .bar-mid {
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked+label .bar-bottom {
+  transform: translateY(-12.5px) rotate(-45deg);
+}
+
+.bg-la-tabs-light {
+  @apply bg-gradient-to-r from-slate-300 to-slate-500 text-[#111];
+}
+
+.bg-la-tabs-dark {
+  @apply bg-gradient-to-r from-slate-900 to-slate-700 text-[#fefefe];
+}
+
+.fg-la-tabs-light {
+  color: #fefefe;
+}
+
+.fg-la-tabs-dark {
+  color: #fefefe;
+}
+
+.bg-la-tabs-light-header {
+  background-color: #e2231b;
+
+}
+
+.bg-la-tabs-dark-header {
+  background-color: #242424;
+}
+
+.bg-la-tabs-light-navlinks {
+  background-color: #e2231b;
+
+}
+
+.bg-la-tabs-light-navlinks:hover {
+  background-color: #88140e;
+
+}
+
+.bg-la-tabs-dark-navlinks {
+  background-color: #242424;
+}
+
+.bg-la-tabs-dark-navlinks:hover {
+  background-color: #444444;
+}
+
+
+.bg-la-tabs-dark-footer {
+  background-color: #242424;
+}
+
+.bg-la-tabs-light-footer {
+  background-color: #e2231b;
+}
+
+
+.checkbox-label {
+  font-size: 1rem;
+  border: .125em solid currentColor;
+  border-radius: 2em;
+  cursor: pointer;
+  display: block;
+  height: 2em;
+  position: relative;
+  width: 3.75em;
+}
+
+.checkbox-label span {
+  background-color: currentColor;
+  border-radius: 2em;
+  display: block;
+  height: 1.5em;
+  left: .25em;
+  overflow: hidden;
+  position: absolute;
+  top: .15em;
+  text-indent: -9999px;
+  transition: left .25s;
+  width: 1.5em;
+  z-index: 2;
+}
+
+.checkbox-label::before,
+.checkbox-label::after {
+  content: '';
+  display: block;
+  border-radius: 1em;
+  position: absolute;
+  z-index: 1;
+}
+
+.checkbox-label::after {
+  box-shadow: .25em .25em #5901d8;
+  height: 1.125em;
+  right: .9em;
+  top: .125em;
+  width: 1.125em;
+}
+
+.checkbox-label::before {
+  background-color: #ffc409;
+  height: .625em;
+  outline: .25em dotted #ffc409;
+  outline-offset: .125em;
+  left: .7em;
+  top: .7em;
+  width: .625em;
+}
+
+input:checked~.checkbox-label span {
+  left: 1.8em;
+}
+
+
+.nav--checkbox-label {
+  font-size: 1rem;
+  border: .125em solid currentColor;
+  border-radius: 2em;
+  cursor: pointer;
+  display: block;
+  height: 2em;
+  position: relative;
+  width: 3.75em;
+}
+
+.nav--checkbox-label span {
+  background-color: currentColor;
+  border-radius: 2em;
+  display: block;
+  height: 1.5em;
+  left: .25em;
+  overflow: hidden;
+  position: absolute;
+  top: .15em;
+  text-indent: -9999px;
+  transition: left .25s;
+  width: 1.5em;
+  z-index: 2;
+}
+
+.nav--checkbox-label::before,
+.nav--checkbox-label::after {
+  content: '';
+  display: block;
+  border-radius: 1em;
+  position: absolute;
+  z-index: 1;
+}
+
+.nav--checkbox-label::after {
+  box-shadow: .25em .25em #5901d8;
+  height: 1.125em;
+  right: .9em;
+  top: .125em;
+  width: 1.125em;
+}
+
+.nav--checkbox-label::before {
+  background-color: #ffc409;
+  height: .625em;
+  outline: .25em dotted #ffc409;
+  outline-offset: .125em;
+  left: .7em;
+  top: .7em;
+  width: .625em;
+}
+
+input:checked~.nav--checkbox-label span {
+  left: 1.8em;
 }
