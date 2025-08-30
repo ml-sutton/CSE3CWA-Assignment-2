@@ -1,6 +1,6 @@
-import CreateNewTab from "../../../utils/tabs/data-access/CreateNewTab";
-import DeleteTabFromLocalStorage from "../../../utils/tabs/data-access/DeleteTabFromLocalStorage.";
-import { Tab } from "../../../utils/tabs/models/tab";
+import CreateNewTab from "../../../utils/data-access/local/CreateNewTab";
+import DeleteTab from "../../../utils/data-access/local/DeleteTab";
+import { Tab } from "../../../domain/models/tab";
 interface TabsNavSubHeaderPropTypes {
   tabs: Tab[]
   setTabs: React.Dispatch<React.SetStateAction<Tab[]>>
@@ -21,7 +21,7 @@ export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, se
   }
   const deleteTab = () => {
     const tabToDelete: number = selectedTab;
-    const didDelete = DeleteTabFromLocalStorage(tabs, tabToDelete);
+    const didDelete = DeleteTab(tabs, tabToDelete);
     didDelete.then(tabsValue => {
       setTabs(tabsValue)
       setSelectedTab(tabToDelete + 1);

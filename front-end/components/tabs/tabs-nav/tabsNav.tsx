@@ -1,13 +1,12 @@
 "use client";
 
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TabsNavTitleBar } from "./tabsNavTitleBar";
-import { ThemeContext } from "../../../utils/theme/context/themeContext";
 import { TabsNavSubHeader } from "./tabsNavSubheader";
 import { TabNavLink } from "./tabNavLinks";
-import { Tab } from "../../../utils/tabs/models/tab";
-import GetTabByID from "../../../utils/tabs/data-access/GetTabByID";
 import { TabsHamburgerMenu } from "./mobile-exclusives/tabs-hamburger/tabsHamburgerMenu";
+import { Tab } from "../../../domain/models/tab";
+import GetTabByID from "@/utils/data-access/local/GetTabByID";
 interface TabsNavPropTypes {
   tabs: Tab[]
   setTabs: React.Dispatch<React.SetStateAction<Tab[]>>
@@ -17,8 +16,6 @@ interface TabsNavPropTypes {
 }
 export const TabsNav: React.FC<TabsNavPropTypes> = ({ tabs, setTabs, selectedTab, setSelectedTab, tabCount }) => {
   const [selectedTabName, setSelectedTabName] = useState<string>("No Tab Selected");
-  const themeContext = useContext(ThemeContext);
-  const themedStyles: string = themeContext?.theme === "light" ? "bg-slate-100 text-[#111]" : "bg-slate-800 text-[#fefefe]"
   useEffect(() => {
     GetTabByID(tabs, selectedTab).then(tabValue => {
       const newTabName = tabValue.tabName;
@@ -31,7 +28,7 @@ export const TabsNav: React.FC<TabsNavPropTypes> = ({ tabs, setTabs, selectedTab
   }, [selectedTab, tabs])
 
   return (
-    <div className={`min-w-1/4 ${themedStyles} border-2 lg: lg:rounded-4xl`}>
+    <div className={`min-w-1/4 "bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe]" border-2 lg: lg:rounded-4xl`}>
       <TabsNavTitleBar tabName={selectedTabName} />
       <div className="hidden lg:block">
         <TabsNavSubHeader tabs={tabs} setTabs={setTabs} selectedTab={selectedTab} tabCount={tabCount} setSelectedTab={setSelectedTab} />

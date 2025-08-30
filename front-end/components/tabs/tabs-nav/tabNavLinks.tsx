@@ -1,5 +1,4 @@
 import Link from "next/link"
-import WriteSelectedTabToCookie from "../../../utils/tabs/data-access/WriteSelectedTabToCookie"
 import React from "react"
 
 interface TabNavLinksPropTypes {
@@ -7,6 +6,7 @@ interface TabNavLinksPropTypes {
   tabID: number
   selectedTab: number
   setSelectedTab: React.Dispatch<React.SetStateAction<number>>
+  
 }
 export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, selectedTab, setSelectedTab }) => {
 
@@ -14,7 +14,7 @@ export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, sel
     event.preventDefault();
     if (selectedTab !== tabID) {
       setSelectedTab(() => tabID)
-      WriteSelectedTabToCookie(tabID).then((isSuccess) => isSuccess ? console.log("wrote to cookies successfully") : console.warn("Failed to write to cookies"))
+      
     }
   }
   return (
