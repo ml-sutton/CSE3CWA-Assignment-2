@@ -1,4 +1,4 @@
-FROM 24-alpine3.21
+FROM node:lts-alpine
 
 # Needed to compile native modules like sqlite3
 RUN apt-get update && apt-get install -y python3 make g++

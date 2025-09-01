@@ -1,4 +1,4 @@
-FROM 24-alpine3.21
+FROM node:lts-alpine
 
 WORKDIR /app
 COPY package*.json ./
