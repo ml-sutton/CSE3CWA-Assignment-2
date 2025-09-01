@@ -1,5 +1,10 @@
 import { useEffect } from "react";
 
+const generateThemeCookie = (theme: "dark"|"light") =>{
+  const yearInSeconds = 60 * 60 * 24 * 365;
+  document.cookie = `currentTheme=${encodeURIComponent(theme)}; Max-Age=${yearInSeconds}; SameSite=Strict; path=/`
+}
+
 export default function useTheme(theme: "light" | "dark" | null) {
   useEffect(() => {
     let themeToApply: "light"|"dark";
