@@ -18,20 +18,25 @@ services:
     ports:
       - "4080:3000"  # Next.js default port for API app
     depends_on:
-      - sqlite
+      - postgres
     environment:
       - NODE_ENV=development
     volumes:
       - ./back-end:/app
-      - sqlite_data:/app/sqlite
+      - /app/node_modules
     command: sh -c "npm run docker-dev"
 
-  sqlite:
-    image: alpine
-    container_name: sqlite-volume-holder
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=myappdb
     volumes:
-      - sqlite_data:/sqlite
-    command: ["sh", "-c", "while true; do sleep 1000; done"]
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 volumes:
-  sqlite_data:
+  pg_data:

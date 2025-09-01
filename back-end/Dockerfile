@@ -1,7 +1,6 @@
 FROM node:lts-alpine
 
-# Needed to compile native modules like sqlite3
-RUN apk update && apk add python3 make g++
+RUN apk update && apk add python3 make g++postgresql-client
 
 WORKDIR /app
 COPY package*.json ./
