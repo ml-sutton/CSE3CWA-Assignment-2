@@ -1,5 +1,4 @@
 import Link from "next/link"
-import WriteSelectedTabToCookie from "../../../../../utils/tabs/data-access/WriteSelectedTabToCookie"
 
 interface TabsHamburgerLinksPropTypes {
   tabName: string
@@ -13,7 +12,6 @@ export const TabsHamburgerLink: React.FC<TabsHamburgerLinksPropTypes> = ({ tabNa
     event.preventDefault();
     if (selectedTab !== tabID) {
       setSelectedTab(() => tabID)
-      WriteSelectedTabToCookie(tabID).then((isSuccess) => isSuccess ? console.log("wrote to cookies successfully") : console.warn("Failed to write to cookies"))
     }
   }
   return (

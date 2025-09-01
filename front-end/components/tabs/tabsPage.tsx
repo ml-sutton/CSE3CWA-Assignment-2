@@ -18,15 +18,15 @@ export const TabsPage: React.FC<TabsPageProps> = ({ tabs }) => {
 
   useEffect(() => {
     setLocalTabs([...tabs]);
-    setLocalSelectedTab(tabs.length === 0 ? 0 : tabs.filter(tab => tab.isSelected)[0].tabId);
-    setLocalTabCount(tabs.length);
+    setLocalSelectedTab(localTabs.length === 0 ? 0 : localTabs.filter(tab => tab.isSelected)[0].tabId);
+    setLocalTabCount(localTabs.length);
   }, [tabs])
 
 
   return (
     <section>
       <div className={`flex flex-col lg:flex-row px-8 py-8 min-h-[85vh] overflow-x-clip max-h-[90vh] bg-gradient-to-r from-slate-300 dark:from-slate-900 to-slate-500 dark:to-slate-700 text-[#111] dark:text-[#fefefe]`}>
-        <TabsNav tabs={localTabs} setTabs={setLocalTabs} selectedTab={localSelectedTab} setSelectedTab={setLocalSelectedTab} tabCount={localTabCount} />
+        <TabsNav setTabCount={setLocalTabCount} tabs={localTabs} setTabs={setLocalTabs} selectedTab={localSelectedTab} setSelectedTab={setLocalSelectedTab} tabCount={localTabCount} />
       </div>
     </section>
   )

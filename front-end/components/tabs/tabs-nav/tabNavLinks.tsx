@@ -6,7 +6,7 @@ interface TabNavLinksPropTypes {
   tabID: number
   selectedTab: number
   setSelectedTab: React.Dispatch<React.SetStateAction<number>>
-  
+
 }
 export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, selectedTab, setSelectedTab }) => {
 
@@ -14,7 +14,7 @@ export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, sel
     event.preventDefault();
     if (selectedTab !== tabID) {
       setSelectedTab(() => tabID)
-      
+
     }
   }
   return (
