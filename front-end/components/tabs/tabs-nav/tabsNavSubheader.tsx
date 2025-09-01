@@ -1,18 +1,21 @@
-import CreateNewTab from "../../../utils/tabs/data-access/CreateNewTab";
-import DeleteTabFromLocalStorage from "../../../utils/tabs/data-access/DeleteTabFromLocalStorage.";
-import { Tab } from "../../../utils/tabs/models/tab";
+import CreateNewTab from "../../../utils/tabs/local-data-access/CreateTab";
+import DeleteTab from "../../../utils/tabs/local-data-access/DeleteTab";
+import { Tab } from "../../../domain/models/tab";
+import React from "react";
 interface TabsNavSubHeaderPropTypes {
   tabs: Tab[]
   setTabs: React.Dispatch<React.SetStateAction<Tab[]>>
   selectedTab: number
   setSelectedTab: React.Dispatch<React.SetStateAction<number>>
   tabCount: number
+  setTabCount: React.Dispatch<React.SetStateAction<number>>
 }
-export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, setTabs, selectedTab, setSelectedTab, tabCount }) => {
+export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, setTabs, selectedTab, setSelectedTab, tabCount, setTabCount }) => {
   const createTab = () => {
     console.log(tabCount)
     CreateNewTab(tabs, tabCount).then(newTabs => {
       setTabs(newTabs);
+      setTabCount(old => old += 1);
     }).catch(error => {
       console.warn(error);
       setTabs(tabs);
@@ -21,10 +24,11 @@ export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, se
   }
   const deleteTab = () => {
     const tabToDelete: number = selectedTab;
-    const didDelete = DeleteTabFromLocalStorage(tabs, tabToDelete);
+    const didDelete = DeleteTab(tabs, tabToDelete);
     didDelete.then(tabsValue => {
-      setTabs(tabsValue)
+      setTabs(tabsValue);
       setSelectedTab(tabToDelete + 1);
+      setTabCount(old => old -= 1);
     }).catch(error => {
       console.warn(error)
       if (tabs.length == 0) {
