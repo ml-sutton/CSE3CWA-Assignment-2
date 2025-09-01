@@ -30,7 +30,7 @@ export const TabsNav: React.FC<TabsNavPropTypes> = ({ tabs, setTabs, selectedTab
   }, [selectedTab])
 
   return (
-    <div className={`min-w-1/4 bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe] border-2 lg: lg:rounded-4xl`}>
+    <div className={`lg:min-w-1/4 lg:max-w-1/4 bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe] border-2 lg: lg:rounded-xl`}>
       <TabsNavTitleBar tabName={selectedTabName} />
       <div className="hidden lg:block">
         <TabsNavSubHeader tabs={tabs} setTabs={setTabs} selectedTab={selectedTab} tabCount={tabCount} setSelectedTab={setSelectedTab} setTabCount={setTabCount} />
