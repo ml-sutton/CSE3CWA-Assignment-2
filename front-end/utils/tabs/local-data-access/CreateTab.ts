@@ -19,7 +19,8 @@ export default function CreateNewTab(currentTabs: Tab[], tabCount: number): Prom
         tabId: tabId,
         tabName: `new tab #${tabId}`,
         tabBody: "# Edit me!",
-        isSelected: false
+        isSelected: false,
+        inDB: false
       }
       const allTabs = currentTabs ?? [];
       return resolve([...allTabs, newTab]);

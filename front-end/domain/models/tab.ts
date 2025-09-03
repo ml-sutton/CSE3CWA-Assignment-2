@@ -3,4 +3,5 @@ export interface Tab {
   tabName: string
   tabBody: string
   isSelected: boolean
+  inDB?: boolean
 }
