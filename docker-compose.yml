@@ -28,7 +28,7 @@ services:
     command: sh -c "npm run docker-dev"
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
