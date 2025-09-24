@@ -5,6 +5,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
+RUN npx prisma generate
+RUN npx prisma migrate deploy
+
+
 COPY . .
 
 EXPOSE 3000
