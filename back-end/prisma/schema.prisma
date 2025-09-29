@@ -15,7 +15,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id   Int    @id() @default(autoincrement())
-  name String
+model Tabs {
+  tabId      Int     @id @default(autoincrement())
+  tabName    String
+  tabBody    String
+  isSelected Boolean @unique
 }

@@ -1,26 +1,24 @@
 "use client"
-import { useEffect, useState } from "react";
-import useTheme from "../../../../hooks/useTheme";
+import { useState } from "react";
 
-export const ThemeSwitcher: React.FC = () => {
-  const [theme, setTheme] = useState<"light" | "dark" | null>(
-    () => {
-      const savedTheme = localStorage.getItem("currentTheme") as "light" | "dark" | null;
-      if (savedTheme) return savedTheme;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-  )
+interface ThemeSwitcherPropType {
+  theme: "dark" | "light"
+}
+
+export const ThemeSwitcher: React.FC<ThemeSwitcherPropType> = (props) => {
+  const [theme, setTheme] = useState<"light" | "dark">(props.theme);
 
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("currentTheme") as "light" | "dark" | null;
-    console.log(savedTheme)
-    setTheme(savedTheme);
-  }, []);
-  useTheme(theme);
-  const toggleTheme = () => {
-    setTheme(prev => (prev === "dark" ? "light" : "dark"));
-  };
+  const toggleTheme = () => setTheme(prev => {
+    const next = prev === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    document.cookie = `currentTheme=${next}; path=/; max-age=31536000; SameSite=Lax`;
+    console.log(next)
+
+    return next;
+  });
+
+
   return (<div className={`flex justify-center text-center`}>
 
     <input
