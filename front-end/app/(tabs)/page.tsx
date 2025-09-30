@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { TabsPage } from "../components/tabs/tabsPage";
+import { TabsPage } from "../../components/tabs/tabsPage";
 
 export default function Home() {
   return (
