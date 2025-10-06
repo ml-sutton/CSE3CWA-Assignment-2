@@ -4,9 +4,10 @@ import { Tab } from "../../../domain/models/tab"
 
 interface TabsFormPropTypes {
   tab: Tab
+  selectedTab: number
 }
 
-export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
+export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab, selectedTab }) => {
   const [hasMounted, setHasMounted] = useState(false);
   const [tabName, setTabName] = useState("NONE")
   const [tabData, setTabData] = useState("NONE")
@@ -18,14 +19,14 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
   }, [tab])
   const handleTabData = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTabData(event.target.value)
-
   }
   const handleTabName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTabName(event.target.value)
   }
-  useEffect(() => {
+  const handleDataSave = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
 
-  }, [tabData, tabName])
+  }
   return tabName === "NONE" ? (
     <div className="min-w-1/2 h-full flex justify-center items-center px-4">
       <div className={` border-2 rounded-xl w-full px-8 py-4 flex justify-center items-center flex-col bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe]`}>

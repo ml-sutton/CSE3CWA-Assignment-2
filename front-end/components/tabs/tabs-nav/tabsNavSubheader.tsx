@@ -1,15 +1,22 @@
 "use client"
 
-import CreateNewTab from "../../../utils/tabs/local-data-access/CreateTab";
-import DeleteTab from "../../../utils/tabs/local-data-access/DeleteTab";
 import { Tab } from "../../../domain/models/tab";
+import CreateTabAsync from "../../../utils/tabs/data-access/create-tab"
 import React from "react";
 interface TabsNavSubHeaderPropTypes {
   tabs: Tab[]
+  selectedTab: number
 }
-export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs }) => {
+export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, selectedTab }) => {
   const createTab = () => {
-
+    CreateTabAsync(tabs.length).then((value: boolean | null) => {
+      if (value === null)
+        alert("INTERNAL SERVER ERROR")
+      if (value === false)
+        alert("MAXIMUM TAB LIMIT REACHED")
+      if (value === true)
+        console.log("tab created")
+    })
 
   }
   const deleteTab = () => {
