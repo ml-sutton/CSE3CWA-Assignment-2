@@ -6,6 +6,7 @@ export async function GET() {
   return NextResponse.json(allTabs);
 }
 export async function POST(request: NextRequest) {
-
+  const newTab = request.body;
+  console.log(newTab);
 }
 
