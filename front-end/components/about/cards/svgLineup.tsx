@@ -6,7 +6,7 @@ import { TailwindSvgComponent } from "./svg-components/tailwindSVGComponent"
 import { TypescriptSvgComponent } from "./svg-components/typescriptSVGComponent"
 import React from "react"
 
-export const SVGLineup = React.memo(() => {
+export const SVGLineup = async () => {
   return (
     <div className="">
       <h1 className="text-xl text-center text-[#fefefe] text-shadow-black text-shadow-md">Built with novel technologies such as : </h1>
@@ -40,4 +40,4 @@ export const SVGLineup = React.memo(() => {
       </div>
     </div>)
 
-})
+}

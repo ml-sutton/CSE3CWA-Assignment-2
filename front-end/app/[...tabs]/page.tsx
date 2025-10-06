@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { TabsPage } from "../../components/tabs/tabsPage";
 
-export default function Home() {
+export default async function Home({ params }: { params: { tabs: string } }) {
   return (
     <Suspense fallback={<></>}>
-      <TabsPage tabs={[]} />
+      <TabsPage tabs={[]} selectedTab={params.tabs} />
     </Suspense>
   );
 }

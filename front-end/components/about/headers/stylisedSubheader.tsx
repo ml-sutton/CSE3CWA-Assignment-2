@@ -3,7 +3,7 @@ import React from "react"
 interface StylizedSubheaderPropTypes {
   text: string
 }
-export const StylizedSubheader: React.FC<StylizedSubheaderPropTypes> = React.memo(({ text }) => {
+export const StylizedSubheader: React.FC<StylizedSubheaderPropTypes> = async ({ text }) => {
   return (<div className="styled-header-wrapper">
     <div className="">
       <div className="flex lg:py-4 lg:px-5 items-center mr-auto justify-center">
@@ -21,4 +21,4 @@ export const StylizedSubheader: React.FC<StylizedSubheaderPropTypes> = React.mem
       </div>
     </div>
   </div>)
-})
+}

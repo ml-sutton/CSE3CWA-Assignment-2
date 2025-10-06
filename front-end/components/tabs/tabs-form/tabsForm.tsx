@@ -3,28 +3,19 @@ import React, { useEffect, useState } from "react"
 import { Tab } from "../../../domain/models/tab"
 
 interface TabsFormPropTypes {
-  tabs: Tab[]
-  setTabs: React.Dispatch<React.SetStateAction<Tab[]>>
-  selectedTab: number
+  tab: Tab
 }
 
-export const TabsForm: React.FC<TabsFormPropTypes> = ({ tabs, setTabs, selectedTab }) => {
+export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
   const [hasMounted, setHasMounted] = useState(false);
-  const [tabName, setTabName] = useState(() => {
-    if (tabs.length <= 0 || tabs.length < selectedTab) return "No Tab Selected"
-    else return tabs.filter(tab => tab.tabId === selectedTab)[0].tabName
-  })
-  const [tabData, setTabData] = useState(() => {
-    if (tabs.length <= 0 || tabs.length < selectedTab) return "No Tab Selected"
-    else return tabs.filter(tab => tab.tabId === selectedTab)[0].tabBody
-  })
+  const [tabName, setTabName] = useState("NONE")
+  const [tabData, setTabData] = useState("NONE")
   useEffect(() => setHasMounted(true), []);
   useEffect(() => {
     if (!hasMounted) return;
-    if (tabs.length <= 0) return;
-    setTabName(tabs.filter(tab => tab.tabId === selectedTab)[0].tabName);
-    setTabData(tabs.filter(tab => tab.tabId === selectedTab)[0].tabBody);
-  }, [selectedTab])
+    setTabName(tab.tabName ?? "NONE")
+    setTabData(tab.tabBody ?? "NONE")
+  }, [tab])
   const handleTabData = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTabData(event.target.value)
 
@@ -33,20 +24,13 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tabs, setTabs, selectedT
     setTabName(event.target.value)
   }
   useEffect(() => {
-    setTabs(tabs.map(tab => tab.tabId === selectedTab ? { ...tab, tabName: tabName, tabBody: tabData } : { ...tab }))
+
   }, [tabData, tabName])
-  return tabs.length == 0 ? (
-    <div className={`min-w-1/2 h-full flex justify-center items-center px-4 `}>
-      <div className={` border-2 rounded-xl w-full px-8 py-4 flex justify-center items-center flex-col bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe]`}>
-        <h1 className="text-2xl">You haven&#39;t created any tabs yet!</h1>
-        <p className="text-xl">Press the + button on the lefthand side of the screen to create some tabs!</p>
-      </div>
-    </div>
-  ) : tabName === "No Tab Selected" ? (
+  return tabName === "NONE" ? (
     <div className="min-w-1/2 h-full flex justify-center items-center px-4">
       <div className={` border-2 rounded-xl w-full px-8 py-4 flex justify-center items-center flex-col bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe]`}>
-        <h1 className="text-2xl">No tab selected!</h1>
-        <p className="text-xl">please select a tab from the sidebar</p>
+        <h1 className="text-2xl">You don't have a tab open!</h1>
+        <p className="text-xl">Please create a new tab or select one from the sidebar</p>
       </div>
     </div>
   ) : (<div className={`min-w-2/3 lg:min-w-1/2 h-full  py-4 lg:p-4`}>

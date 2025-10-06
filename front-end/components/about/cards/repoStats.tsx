@@ -4,7 +4,7 @@ import Link from "next/link";
 interface RepoStatsPropTypes {
   repoStats: RepoStatistics
 }
-export const RepoStats: React.FC<RepoStatsPropTypes> = ({ repoStats }) => {
+export const RepoStats: React.FC<RepoStatsPropTypes> = async ({ repoStats }) => {
 
   return (
     <div className="py-8 lg:px-8">

@@ -5,20 +5,13 @@ interface TabNavLinksPropTypes {
   tabName: string
   tabID: number
   selectedTab: number
-  setSelectedTab: React.Dispatch<React.SetStateAction<number>>
 
 }
-export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, selectedTab, setSelectedTab }) => {
+export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, selectedTab }) => {
 
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    if (selectedTab !== tabID) {
-      setSelectedTab(() => tabID)
 
-    }
-  }
   return (
-    <Link href="" onClick={handleClick}>
+    <Link href={`/${tabID}`}>
       <div className="px-4 py-2 border-b-2 cursor-pointer hover:bg-blue-300 hover:text-shadow-md  hover:text-shadow-white dark:hover:text-shadow-black">
         {tabName}
       </div>

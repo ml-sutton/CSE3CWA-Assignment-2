@@ -8,7 +8,7 @@ interface MainCardPropTypes {
   repoStats: RepoStatistics
 }
 
-export const MainCard: React.FC<MainCardPropTypes> = ({ repoStats }) => {
+export const MainCard: React.FC<MainCardPropTypes> = async ({ repoStats }) => {
   return (<div className=" h-fit border-2 border-[#111111] rounded-4xl">
     <div className="border-2 rounded-4xl border-slate-200">
       <div className="min-w-full lg:p-4 bg-gradient-to-r from-violet-200 to-pink-200 h-fit border-2 border-[#111111] rounded-4xl lg:py-8">

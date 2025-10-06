@@ -8,9 +8,6 @@ export interface CourtRoomTask {
   description: string
 }
 export interface CourtRoomEvent {
-  outcome: CourtRoomEventOutcome
+  outcome: string
   timer: number
-}
-export interface CourtRoomEventOutcome {
-
 }

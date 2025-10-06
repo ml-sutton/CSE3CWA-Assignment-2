@@ -1,5 +1,4 @@
 import { RepoStatistics } from "../../domain/models/repoStatistics"
-import { LoadingModal } from "../global/modals/loadingModal"
 import { MainCard } from "./cards/mainCard"
 
 interface AboutPagePropTypes {
