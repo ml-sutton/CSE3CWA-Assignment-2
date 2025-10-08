@@ -1,9 +1,9 @@
 "use server"
 import { CreateTabRequest } from "@/domain/DTO/CreateTabRequest";
 import { revalidatePath } from "next/cache";
+import { getAPIURL } from "./getAPIURL";
 export default async function CreateTabAsync(tabCount: number) {
-  const apiUrlFromEnv = process.env.API_URL
-  const apiUrl = apiUrlFromEnv === undefined ? "http://127.0.0.1:3000/api/tabs" : `${apiUrlFromEnv}/api/tabs`
+  const apiUrl = await getAPIURL();
 
   if (tabCount + 1 === 16) {
     return false
@@ -18,7 +18,7 @@ export default async function CreateTabAsync(tabCount: number) {
     method: "POST",
     body: JSON.stringify(newTab),
     headers: {
-
+      "Content-Type": "application/json",
     }
 
   })

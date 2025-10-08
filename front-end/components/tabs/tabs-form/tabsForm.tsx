@@ -7,10 +7,10 @@ interface TabsFormPropTypes {
   selectedTab: number
 }
 
-export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab, selectedTab }) => {
+export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
   const [hasMounted, setHasMounted] = useState(false);
-  const [tabName, setTabName] = useState("NONE")
-  const [tabData, setTabData] = useState("NONE")
+  const [tabName, setTabName] = useState(typeof tab === "undefined" ? "NONE" : tab.tabName)
+  const [tabData, setTabData] = useState(typeof tab === "undefined" ? "NONE" : tab.tabBody)
   useEffect(() => setHasMounted(true), []);
   useEffect(() => {
     if (!hasMounted) return;
