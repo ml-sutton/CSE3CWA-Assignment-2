@@ -19,5 +19,5 @@ model Tabs {
   tabId      Int     @id @default(autoincrement())
   tabName    String
   tabBody    String
-  isSelected Boolean @unique
+  isSelected Boolean
 }
