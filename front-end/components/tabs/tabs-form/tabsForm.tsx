@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import { Tab } from "../../../domain/models/tab"
+import { UpdateTabRequest } from "../../../domain/DTO/UpdateTabRequest"
+import SaveTabToCloud from "@/utils/tabs/data-access/saveTabToCloud"
 
 interface TabsFormPropTypes {
   tab: Tab
@@ -14,8 +16,9 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
   useEffect(() => setHasMounted(true), []);
   useEffect(() => {
     if (!hasMounted) return;
-    setTabName(tab.tabName ?? "NONE")
-    setTabData(tab.tabBody ?? "NONE")
+
+    setTabName(tab.tabName)
+    setTabData(tab.tabBody)
   }, [tab])
   const handleTabData = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTabData(event.target.value)
@@ -25,7 +28,12 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
   }
   const handleDataSave = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
+    const tabToPush: UpdateTabRequest = {
+      tabName: tabName,
+      tabBody: tabData,
+      isSelected: true
+    }
+    SaveTabToCloud(tab.tabId, tabToPush).then(_ => console.log("pushing"))
   }
   return tabName === "NONE" ? (
     <div className="min-w-1/2 h-full flex justify-center items-center px-4">
@@ -40,7 +48,7 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
         <label htmlFor="tab-name-input" className={`lg:text-xl lg:border-2 border-r-0 px-4 lg:px-8 lg:py-[11px] rounded-l-lg `}>Tab Name : </label>
         <input className={`lg:text-xl lg:border-2 lg:border-l-0 lg:px-8 lg:py-2 rounded-tr-xl lg:rounded-r-lg active:border-blue-800 hover:border-blue-500 `} type="text" id="tab-name-input" value={tabName} onChange={handleTabName} />
         <div className="flex justify-center items-center ml-auto">
-          <button className="lg:text-xl lg:border-2 lg:px-8 lg:py-2 rounded-lg cursor-pointer hover:bg-blue-400 active:border-blue-500 disabled:hover:bg-red-500 disabled:hover:text-red-950 disabled:active:border-red-500 bg-zinc-300 dark:bg-gray-700 text-[#111] dark:text-[#fefefe] text-shadow-md text-shadow-zinc-50 dark:text-shadow-grey-900 border-slate-50 dark:border-zinc-800">Save Data To Cloud</button>
+          <button className="lg:text-xl lg:border-2 lg:px-8 lg:py-2 rounded-lg cursor-pointer hover:bg-blue-400 active:border-blue-500 disabled:hover:bg-red-500 disabled:hover:text-red-950 disabled:active:border-red-500 bg-zinc-300 dark:bg-gray-700 text-[#111] dark:text-[#fefefe] text-shadow-md text-shadow-zinc-50 dark:text-shadow-grey-900 border-slate-50 dark:border-zinc-800" onClick={handleDataSave}  >Save Data To Cloud</button>
         </div>
       </div>
       <div className="lg:border-t-2 lg:pt-4">

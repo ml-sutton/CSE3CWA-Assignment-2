@@ -8,7 +8,7 @@ interface TabsNavPropTypes {
   selectedTab: number
 }
 export const TabsNav: React.FC<TabsNavPropTypes> = async ({ tabs, selectedTab }) => {
-
+  const localTabs = tabs.sort((a, b) => a.tabId - b.tabId)
   return (
     <div className={`lg:min-w-1/4 lg:max-w-1/4 bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe] border-2 lg: lg:rounded-xl`}>
       <TabsNavTitleBar tabName={!tabs[selectedTab] ? "no tab selected" : tabs[selectedTab].tabName} />
@@ -21,7 +21,7 @@ export const TabsNav: React.FC<TabsNavPropTypes> = async ({ tabs, selectedTab })
             You have not created any tabs yet! Please press the + button to create a tab and start exporting!
           </div>
         ) : <ul>
-          {tabs.map((tab, key) => {
+          {localTabs.map((tab, key) => {
             return <li key={key}><TabNavLink tabID={tab.tabId} tabName={tab.tabName ?? "untitled tab"} selectedTab={selectedTab} /></li>
           })}
         </ul>}
