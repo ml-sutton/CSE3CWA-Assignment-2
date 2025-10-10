@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { TabsPage } from "../../components/tabs/tabsPage";
-import PullAllTabs from "@/utils/tabs/data-access/pull-all";
+import PullAllTabs from "@/utils/tabs/data-access/pullAll";
 import { Tab } from "@/domain/models/tab";
-import UpdateSelected from "@/utils/tabs/data-access/update-selected";
+import UpdateSelected from "@/utils/tabs/data-access/updateSelected";
 
 export default async function Home({ params }: { params: { tabs: string } }) {
   const awaitedParam = await params;

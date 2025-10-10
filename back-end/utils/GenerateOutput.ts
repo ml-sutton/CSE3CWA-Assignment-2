@@ -1,4 +1,4 @@
-import { Tab } from "../../../domain/models/tab";
+import { Tab } from "../models/tab";
 import SanitizeTabs from "./SanitizeTabs";
 
 export const GenerateTabOutput = (tabs: Tab[]) => {

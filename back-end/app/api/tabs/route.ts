@@ -45,31 +45,6 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
-export async function DELETE(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const tabIdParam = searchParams.get("tabId");
-    const tabId = tabIdParam ? parseInt(tabIdParam, 10) : NaN;
-
-    if (isNaN(tabId)) {
-      return NextResponse.json({ error: "Invalid or missing tabId" }, { status: 400 });
-    }
-
-    const deletedTab = await Prisma.tabs.delete({
-      where: { tabId },
-    });
-
-    return NextResponse.json({ message: "Tab deleted successfully", tab: deletedTab });
-  } catch (error: any) {
-    console.error("Error deleting tab:", error);
-
-    if (error.code === "P2025") {
-      return NextResponse.json({ error: "Tab not found" }, { status: 404 });
-    }
-
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
-}
 
 // This just handled creating tabs. NOT SAVING THEM.
 export async function POST(request: NextRequest) {

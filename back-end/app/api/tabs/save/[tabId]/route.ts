@@ -1,5 +1,15 @@
+import CorsHeaders from "@/consts/corsHeaders";
 import { Prisma } from "../../../../_lib/Prisma";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: CorsHeaders,
+  });
+}
+
+
 export async function PATCH(request: NextRequest, { params }: { params: { tabId: string } }) {
   try {
     const localTabId = parseInt(params.tabId, 10);
@@ -36,6 +46,34 @@ export async function PATCH(request: NextRequest, { params }: { params: { tabId:
   } catch (error) {
     console.error("Error updating tab:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { tabId: string } }) {
+  try {
+    console.log("this runs on the server")
+    const localTabId = Number(params.tabId);
+
+    if (isNaN(localTabId) || localTabId <= 0) {
+      return NextResponse.json({ error: "Invalid or missing tabId" }, { status: 400, headers: CorsHeaders });
+    }
+
+    const deletedTab = await Prisma.tabs.delete({
+      where: { tabId: localTabId },
+    });
+
+    return NextResponse.json(
+      { message: "Tab deleted successfully", tab: deletedTab },
+      { status: 200, headers: CorsHeaders }
+    );
+  } catch (error: any) {
+    console.error("Error deleting tab:", error);
+
+    if (error.code === "P2025") {
+      return NextResponse.json({ error: "Tab not found" }, { status: 404, headers: CorsHeaders });
+    }
+
+    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: CorsHeaders });
   }
 }
 

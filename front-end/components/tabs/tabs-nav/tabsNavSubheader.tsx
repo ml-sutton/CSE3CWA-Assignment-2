@@ -1,7 +1,8 @@
 "use client"
 
+import DeleteTabAsync from "@/utils/tabs/data-access/deleteTab";
 import { Tab } from "../../../domain/models/tab";
-import CreateTabAsync from "../../../utils/tabs/data-access/create-tab"
+import CreateTabAsync from "../../../utils/tabs/data-access/createTab"
 import React from "react";
 interface TabsNavSubHeaderPropTypes {
   tabs: Tab[]
@@ -20,7 +21,14 @@ export const TabsNavSubHeader: React.FC<TabsNavSubHeaderPropTypes> = ({ tabs, se
 
   }
   const deleteTab = () => {
-
+    DeleteTabAsync(selectedTab).then(value => {
+      if (value)
+        return
+      if (!value)
+        console.log("tab not found")
+      else
+        console.log("internal server error")
+    })
   }
   return (
 

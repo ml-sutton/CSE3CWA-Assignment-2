@@ -1,4 +1,4 @@
-import { Tab } from "../../../domain/models/tab";
+import { Tab } from "../models/tab";
 // BEGIN  
 // THIS CODE IS AI generated
 const escapeHTML = (str: string) => {
