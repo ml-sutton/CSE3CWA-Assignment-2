@@ -13,8 +13,8 @@ export const PageLinks: PageLink[] = [
     href: "/preLabQuestions"
   },
   {
-    name: "Escape Room",
-    href: "/escapeRoom"
+    name: "Court Room",
+    href: "/courtRoom"
   },
   {
     name: "Coding Races",
