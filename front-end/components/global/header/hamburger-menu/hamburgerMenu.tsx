@@ -17,7 +17,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuPropTypes> = ({ isOpen }) => {
             <HamburgerLink href={item.href} name={item.name} isActive={item.href === currentRoute} />
           </li>))}
           <li>
-            <ThemeSwitcherHamburger />
+            {/* <ThemeSwitcherHamburger /> */}
           </li>
         </ul>
       </div>

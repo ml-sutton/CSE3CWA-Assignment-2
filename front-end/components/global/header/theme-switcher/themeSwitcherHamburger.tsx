@@ -1,22 +1,22 @@
 "use client"
-import useTheme from "../../../../hooks/useTheme";
 import { useEffect, useState } from "react";
 
 export const ThemeSwitcherHamburger = () => {
-  const [theme, setTheme] = useState<"light" | "dark" | null>(() => {
-    const savedTheme = localStorage.getItem("currentTheme") as "light" | "dark" | null;
-    if (savedTheme) return savedTheme;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  })
-  useTheme(theme);
-
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("currentTheme") as "light" | "dark" | null;
-    setTheme(savedTheme ?? null);
+    const savedTheme = document.cookie.split('; ').find(row => row.startsWith('currentTheme='))?.split('=')[1] as "light" | "dark" | undefined;
+    setTheme(savedTheme ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   }, []);
+
   const toggleTheme = () => {
-    setTheme(prev => (prev === "dark" ? "light" : "dark"));
+    setTheme(prev => {
+      const next = prev === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.cookie = `currentTheme=${next}; path=/; max-age=31536000; SameSite=Lax`;
+      console.log(next)
+      return next;
+    });
   };
 
   return (

@@ -1,10 +1,13 @@
 FROM node:lts-alpine
 
-RUN apk update && apk add python3 make g++postgresql-client
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
+
+RUN npx prisma generate
+RUN npx prisma migrate deploy
+
 
 COPY . .
 

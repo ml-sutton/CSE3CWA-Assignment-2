@@ -1,4 +1,3 @@
-"use client"
 import Link from "next/link";
 import React from "react";
 
@@ -6,7 +5,7 @@ interface StylizedH1PropTypes {
   text: string;
 }
 
-export const StylizedHeader: React.FC<StylizedH1PropTypes> = React.memo(({ text }) => {
+export const StylizedHeader: React.FC<StylizedH1PropTypes> = async ({ text }) => {
   return (
     <div className="styled-header-wrapper">
       <div className="">
@@ -26,4 +25,4 @@ export const StylizedHeader: React.FC<StylizedH1PropTypes> = React.memo(({ text 
       </div>
     </div>
   )
-})
+}

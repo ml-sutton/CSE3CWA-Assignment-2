@@ -1,4 +1,3 @@
-
 services:
   frontend:
     build: ./front-end
@@ -8,6 +7,7 @@ services:
       - api
     environment:
       - NODE_ENV=development
+      - API_URL=http://api:3000
     volumes:
       - ./front-end:/app
       - /app/node_modules
@@ -16,27 +16,36 @@ services:
   api:
     build: ./back-end
     ports:
-      - "4080:3000"  # Next.js default port for API app
+      - "4080:3000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+        restart: true
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     volumes:
       - ./back-end:/app
       - /app/node_modules
     command: sh -c "npm run docker-dev"
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=myappdb
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
 volumes:
   pg_data:
