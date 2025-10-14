@@ -27,7 +27,7 @@ services:
     volumes:
       - ./back-end:/app
       - /app/node_modules
-    command: sh -c "npm run docker-dev"
+    command: sh -c "npx prisma generate && npm run docker-dev"
 
   postgres:
     image: postgres
