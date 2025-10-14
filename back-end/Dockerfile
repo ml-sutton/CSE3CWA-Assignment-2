@@ -8,6 +8,7 @@ RUN npm ci
 RUN npx prisma generate
 RUN npx prisma migrate deploy
 
+RUN rm -rf .next
 
 COPY . .
 
