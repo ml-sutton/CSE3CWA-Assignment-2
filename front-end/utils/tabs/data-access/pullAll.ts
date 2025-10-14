@@ -8,8 +8,9 @@ export default async function PullAllTabs(): Promise<Tab[]> {
 
   const allTabs = await fetch(apiUrl)
   const reqBody = await allTabs.json();
-  console.log(reqBody)
+  if (!reqBody)
+    console.log(reqBody)
 
-  const tabArray: Tab[] = reqBody
+  const tabArray: Tab[] = !reqBody ? [] : reqBody
   return tabArray;
 }
