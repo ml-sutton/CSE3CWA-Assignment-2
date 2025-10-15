@@ -5,7 +5,7 @@ import { useState } from "react"
 export default function CourtRoomForm() {
   const [timer, setTimer] = useState<{ min: number, sec: number }>({ min: 5, sec: 30 });
   const [difficulty, setDifficulty] = useState<{ scale: number, interval: number }>({ scale: 1.25, interval: 30 });
-  const [task, setTask] = useState<string>("Generate me a next.js page that shows card components for a product class")
+  const [task, setTask] = useState<string>("Generate me a next.js page that shows card components for a product class");
   return (
     <div className="w-full">
       <div className="">
@@ -21,7 +21,7 @@ export default function CourtRoomForm() {
         <div className="flex flex-col">
           <div className="flex">
             <label htmlFor="initial-task">Initial task</label>
-            <input type="text" id="initial-task" name="initial-task" placeholder="initial task" className="" />
+            <input type="text" id="initial-task" name="initial-task" placeholder="initial task" className="" value={task} onChange={event => setTask(event.target.value)} />
           </div>
 
           <label htmlFor="">Difficulty scaler</label>
