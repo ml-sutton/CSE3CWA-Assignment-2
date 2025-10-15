@@ -19,15 +19,20 @@ export default function CourtRoomForm() {
           <input type="number" min={0} max={59} value={timer.sec} onChange={event => setTimer({ ...timer, sec: Number(event.target.value) })} className="w-fit border-2" />
         </div>
         <div className="flex flex-col">
-          <div className="flex">
-            <label htmlFor="initial-task">Initial task</label>
-            <input type="text" id="initial-task" name="initial-task" placeholder="initial task" className="" value={task} onChange={event => setTask(event.target.value)} />
+          <div className="flex gap-4 border-2">
+            <label htmlFor="initial-task">Initial task:  </label>
+            <input type="text" id="initial-task" name="initial-task" placeholder="initial task" className="w-full" value={task} onChange={event => setTask(event.target.value)} />
           </div>
-
-          <label htmlFor="">Difficulty scaler</label>
-          <input type="number" value={difficulty.scale} min={0.75} max={2.50} onChange={event => setDifficulty({ ...difficulty, scale: Number(event.target.value) })} className="w-fit border-2" />
-          <label htmlFor="">Difficulty interval</label>
-          <input type="number" value={difficulty.interval} onChange={event => setDifficulty({ ...difficulty, interval: Number(event.target.value) })} className="w-fit border-2" />
+          <div className="flex gap-8">
+            <div className="flex gap-4">
+              <label htmlFor="">Difficulty scaler</label>
+              <input type="number" value={difficulty.scale} min={0.75} max={2.50} onChange={event => setDifficulty({ ...difficulty, scale: Number(event.target.value) })} className="w-min border-2" />
+            </div>
+            <div className="flex gap-4">
+              <label htmlFor="">Difficulty interval</label>
+              <input type="number" value={difficulty.interval} onChange={event => setDifficulty({ ...difficulty, interval: Number(event.target.value) })} className="w-min border-2" />
+            </div>
+          </div>
         </div>
       </form>
     </div>
