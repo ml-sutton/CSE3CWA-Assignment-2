@@ -21,7 +21,7 @@ export default async function CourtRoomOutput() {
         <button className="w-1/2 border-2 rounded-tr-xl" >Copy to clipboard</button>
       </div>
       <div className="bg-slate-100">
-        <code>
+        <code className="overflow-y-scroll">
           {data}
         </code>
       </div>
