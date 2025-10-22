@@ -1,7 +1,7 @@
 import { GameEvent } from "../../domain/models/gameEvent";
 import { Task } from "../../domain/models/task"
 
-export const GenerateGameOutput = (tasks: Task[], events: GameEvent[]) => {
+export const GenerateGameOutput = (tasks: Task[], events: GameEvent[], timeSec: number) => {
   const taskString = JSON.stringify(tasks, null, 2);
   const eventString = JSON.stringify(events, null, 2);
   const data = `<section id = "gameRoot"
@@ -43,7 +43,7 @@ export const GenerateGameOutput = (tasks: Task[], events: GameEvent[]) => {
         var courtMsg = document.getElementById('courtMsg');
         var resetBtn = document.getElementById('resetBtn');
 
-        var totalTimeSec = 330;
+        var totalTimeSec = ${timeSec};
         var elapsedSec = 0;
         var countdownInterval = null;
         var timerStarted = false;
@@ -78,7 +78,7 @@ export const GenerateGameOutput = (tasks: Task[], events: GameEvent[]) => {
           pendingEventTimers[tabId] = setTimeout(() => {
             const e = events.find(x => x.tabId === tabId);
             if (e && !e.edited) goToCourt(e.court || 'You failed to fix the event');
-          }, 2 * 60 * 1000);
+          }, 30000);
         }
 
         const eventSpawner = setInterval(() => {

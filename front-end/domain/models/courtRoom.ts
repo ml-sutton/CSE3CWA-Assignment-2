@@ -1,13 +1,8 @@
+import { GameEvent } from "./gameEvent";
+import { Task } from "./task";
+
 export interface CourtRoomModel {
-  id: number
-  tasks: CourtRoomTask[]
-  events: CourtRoomEvent[]
-  time: number
-}
-export interface CourtRoomTask {
-  description: string
-}
-export interface CourtRoomEvent {
-  outcome: string
-  timer: number
+  events: GameEvent[]
+  tasks: Task[]
+  totalSeconds: number
 }
