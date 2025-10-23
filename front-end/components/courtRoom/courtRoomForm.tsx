@@ -27,7 +27,6 @@ export interface CourtRoomModel {
 
 export default function CourtRoomForm() {
   const [timer, setTimer] = useState<{ min: number; sec: number }>({ min: 5, sec: 30 });
-  const [difficulty, setDifficulty] = useState<{ scale: number; interval: number }>({ scale: 1.25, interval: 30 });
   const [initialTask, setInitialTask] = useState<string>("Generate me a next.js page that shows card components for a product class");
 
   const [events, setEvents] = useState<GameEvent[]>([]);
@@ -46,6 +45,12 @@ export default function CourtRoomForm() {
 
   const removeEvent = (index: number) => {
     setEvents(events.filter((_, i) => i !== index));
+  };
+  const handleCopyToClipboard = () => {
+    if (generatedModel) {
+      navigator.clipboard.writeText(generatedModel);
+      alert('Model copied to clipboard!');
+    }
   };
 
   const addTask = () => {
@@ -113,30 +118,6 @@ export default function CourtRoomForm() {
                 className="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter initial task description"
               />
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-600">Difficulty Scale:</label>
-                <input
-                  type="number"
-                  value={difficulty.scale}
-                  min={0.75}
-                  max={2.50}
-                  step={0.05}
-                  onChange={e => setDifficulty({ ...difficulty, scale: Number(e.target.value) })}
-                  className="w-24 px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-600">Difficulty Interval:</label>
-                <input
-                  type="number"
-                  value={difficulty.interval}
-                  onChange={e => setDifficulty({ ...difficulty, interval: Number(e.target.value) })}
-                  className="w-24 px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
             </div>
           </div>
 
@@ -313,11 +294,19 @@ export default function CourtRoomForm() {
           <div className="flex gap-4 pt-4">
             <button
               onClick={handleGenerate}
-              className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium text-lg"
+              className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium text-lg"
             >
               Generate Court Room Model
             </button>
+            <button
+              onClick={handleCopyToClipboard}
+              disabled={!generatedModel}
+              className="flex items-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              Copy to Clipboard
+            </button>
           </div>
+
 
           {generatedModel && (
             <div className="mt-6">

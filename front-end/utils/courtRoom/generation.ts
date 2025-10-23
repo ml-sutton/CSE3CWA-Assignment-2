@@ -16,7 +16,7 @@ export const GenerateGameOutput = (tasks: Task[], events: GameEvent[], timeSec: 
       <section style="position:relative;z-index:2;background:rgba(255,255,255,0.92);padding-bottom:48px;height:100%;" >
         <h3 id="heading" style = "margin:12px 12px 8px;font-size:18px;" > </h3>
           <div id = "body" style = "padding:12px;font-size:14px;display:block;overflow:auto;height:calc(100% - 120px);" > </div>
-            <div id = "timer" style = "position:absolute;top:8px;right:12px;font-weight:bold;color:#333;z-index:3;" > 5: 30 </div>
+            <div id = "timer" style = "position:absolute;top:8px;right:12px;font-weight:bold;color:#333;z-index:3;" >Start typing to start the timer</div>
 
                 <div id="courtOverlay"
   style = "position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:4;pointer-events:none;opacity:0;transition:opacity .3s ease;" >
