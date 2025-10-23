@@ -19,6 +19,7 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
 
     setTabName(tab.tabName)
     setTabData(tab.tabBody)
+    // eslint-disable-next-line
   }, [tab])
   const handleTabData = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTabData(event.target.value)
@@ -33,12 +34,13 @@ export const TabsForm: React.FC<TabsFormPropTypes> = ({ tab }) => {
       tabBody: tabData,
       isSelected: true
     }
+    // eslint-disable-next-line
     SaveTabToCloud(tab.tabId, tabToPush).then(_ => console.log("pushing"))
   }
   return tabName === "NONE" ? (
     <div className="min-w-1/2 h-full flex justify-center items-center px-4">
       <div className={` border-2 rounded-xl w-full px-8 py-4 flex justify-center items-center flex-col bg-slate-100 dark:bg-slate-800 text-[#111] dark:text-[#fefefe]`}>
-        <h1 className="text-2xl">You don't have a tab open!</h1>
+        <h1 className="text-2xl">You don&apos;t have a tab open!</h1>
         <p className="text-xl">Please create a new tab or select one from the sidebar</p>
       </div>
     </div>

@@ -1,7 +1,6 @@
 "use client"
 import { usePathname } from "next/navigation"
 import { PageLinks } from "../../../../const/pagelinks"
-import { ThemeSwitcherHamburger } from "../theme-switcher/themeSwitcherHamburger"
 import { HamburgerLink } from "./hamburgerLink"
 
 interface HamburgerMenuPropTypes {

@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { useContext } from "react"
 
 interface HamburgerLinkPropTypes {
   name: string

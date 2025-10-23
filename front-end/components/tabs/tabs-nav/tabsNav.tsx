@@ -23,7 +23,7 @@ export const TabsNav: React.FC<TabsNavPropTypes> = async ({ tabs, selectedTab })
           </div>
         ) : <ul>
           {localTabs.map((tab, key) => {
-            return <li key={key}><TabNavLink tabID={tab.tabId} tabName={tab.tabName ?? "untitled tab"} selectedTab={selectedTab} /></li>
+            return <li key={key}><TabNavLink tabID={tab.tabId} tabName={tab.tabName ?? "untitled tab"} /></li>
           })}
         </ul>}
       </nav>

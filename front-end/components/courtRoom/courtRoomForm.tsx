@@ -36,7 +36,7 @@ export default function CourtRoomForm() {
   const addEvent = () => {
     setEvents([...events, { from: '', court: '', isRevision: false, text: '', repeat: '' }]);
   };
-
+  // eslint-disable-next-line
   const updateEvent = (index: number, field: keyof GameEvent, value: any) => {
     const newEvents = [...events];
     newEvents[index] = { ...newEvents[index], [field]: value };
@@ -57,7 +57,7 @@ export default function CourtRoomForm() {
     const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.tabId)) + 1 : 1;
     setTasks([...tasks, { tabId: newId, tabName: '', tabBody: '', isEvent: false, edited: false }]);
   };
-
+  // eslint-disable-next-line
   const updateTask = (index: number, field: keyof Task, value: any) => {
     const newTasks = [...tasks];
     newTasks[index] = { ...newTasks[index], [field]: value };
@@ -205,7 +205,7 @@ export default function CourtRoomForm() {
 
               {events.length === 0 && (
                 <div className="text-center py-8 text-gray-400">
-                  No events added yet. Click "Add Event" to create one.
+                  No events added yet. Click &quot;Add Event&quot; to create one.
                 </div>
               )}
             </div>
@@ -285,7 +285,7 @@ export default function CourtRoomForm() {
 
               {tasks.length === 0 && (
                 <div className="text-center py-8 text-gray-400">
-                  No tasks added yet. Click "Add Task" to create one.
+                  No tasks added yet. Click &quot;Add Task&quot; to create one.
                 </div>
               )}
             </div>

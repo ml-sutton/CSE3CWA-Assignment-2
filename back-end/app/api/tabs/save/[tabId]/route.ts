@@ -66,6 +66,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { tabId
       { message: "Tab deleted successfully", tab: deletedTab },
       { status: 200, headers: CorsHeaders }
     );
+    // eslint-disable-next-line
   } catch (error: any) {
     console.error("Error deleting tab:", error);
 

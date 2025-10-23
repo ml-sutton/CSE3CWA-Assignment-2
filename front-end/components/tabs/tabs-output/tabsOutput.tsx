@@ -1,5 +1,4 @@
 "use client"
-import { Tab } from "@/domain/models/tab";
 import CompileTabs from "@/utils/tabs/data-access/compileTabs";
 import { useState } from "react";
 

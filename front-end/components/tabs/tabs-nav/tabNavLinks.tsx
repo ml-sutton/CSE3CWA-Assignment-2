@@ -4,10 +4,9 @@ import React from "react"
 interface TabNavLinksPropTypes {
   tabName: string
   tabID: number
-  selectedTab: number
 
 }
-export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID, selectedTab }) => {
+export const TabNavLink: React.FC<TabNavLinksPropTypes> = ({ tabName, tabID }) => {
 
 
   return (
